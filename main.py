@@ -8,9 +8,9 @@ def main(template, set_image):
     tasks = [(overlay, template.format(overlay)) for overlay in overlays if path.isdir(overlay)]
     for (overlay, output) in tasks:
         if set_image is not None:
-            subprocess.run(['edit', 'set', 'image', set_image])
+            subprocess.run(['kustomize', 'edit', 'set', 'image', set_image])
         subprocess.run(["kustomize", "build", overlay, "-o", output])
-        
+
 if __name__ == "__main__":
     if len(sys.argv) == 1:
         print("kustomize-build-all template [set-image]")
